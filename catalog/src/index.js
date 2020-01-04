@@ -3,6 +3,7 @@
 const PORT = process.env.PORT || 3000;
 const express = require('express');
 const bodyParser = require('body-parser');
+const routes = require("./routes");
 
 var app = express();
 app.use(bodyParser.json());
@@ -15,23 +16,9 @@ app.use((_,res,next)=>{
     next();
 });
 
-app.get('/catalog',(req,res)=>{
-    console.log("get called");
-    res.send("Hello get");
-});
+routes(app);
 
-app.post('/catalog',(req,res)=>{
-    console.log("post called ",req.body);
-    res.status(200).send(req.body)
-    //res.send("Hello post ", req.body);
-});
-
-
-
-app.get("/", (req,res)=> {
-    res.send("Hello");
-});
 app.listen(PORT, (request, response)=>{
-    console.log("Listening on ${PORT}", PORT);
+    console.log(`Listening on ${PORT}`, PORT);
     
 });
